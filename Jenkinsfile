@@ -15,14 +15,16 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("asia.gcr.io/indigo-tracker-356505/busybox:${env.BUILD_ID}")
+                    //myapp = docker.build("asia.gcr.io/indigo-tracker-356505/busybox:${env.BUILD_ID}")
+                    myapp = docker.build("asia-docker.pkg.dev/indigo-tracker-356505/asia.gcr.io:${env.BUILD_ID}")
+
                 }
             }
         }
         stage("Push image") {
             steps {
                 script {
-                    docker.withRegistry('https://asia.gcr.io', 'gcr:gcr-registry') {
+                    docker.withRegistry('https://asia-docker.pkg.dev/indigo-tracker-356505/asia.gcr.io', 'gcr:gcr-registry') {
                             myapp.push("latest")
                             myapp.push("${env.BUILD_ID}")
                     }
