@@ -15,14 +15,14 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("<<Your DockerHub username>>/hello:${env.BUILD_ID}")
+                    myapp = docker.build("asia.gcr.io/indigo-tracker-356505/busybox:${env.BUILD_ID}")
                 }
             }
         }
         stage("Push image") {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerID') {
+                    docker.withRegistry('https://asia.gcr.io', 'gcr-registry') {
                             myapp.push("latest")
                             myapp.push("${env.BUILD_ID}")
                     }
