@@ -23,7 +23,8 @@ pipeline {
         stage("Push image") {
             steps {
                 script {
-                    docker.withRegistry('https://asia-southeast2-docker.pkg.dev', 'gcr-registry') {
+                    //docker.withRegistry('https://asia-southeast2-docker.pkg.dev', 'gcr-registry') {
+                    docker.withRegistry('https://asia-southeast2-docker.pkg.dev/lif-stg/busybox') {    
                             myapp.push("latest")
                             myapp.push("${env.BUILD_ID}")
                     }
