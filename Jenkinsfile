@@ -24,7 +24,8 @@ pipeline {
             steps {
                 script {
                     //docker.withRegistry('https://asia-southeast2-docker.pkg.dev', 'gcr-registry') {
-                    docker.withRegistry("https://asia-southeast2-docker.pkg.dev/lif-stg/testing/busybox:${env.BUILD_ID}") {    
+                    //docker.withRegistry("https://asia-southeast2-docker.pkg.dev/lif-stg/testing/busybox:${env.BUILD_ID}") {  
+                    docker.withRegistry('https://asia-southeast2-docker.pkg.dev') {  
                             myapp.push("latest")
                             myapp.push("${env.BUILD_ID}")
                     }
