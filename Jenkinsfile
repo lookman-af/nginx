@@ -6,6 +6,9 @@ pipeline {
         //LOCATION = '<<Your GKE Cluster Location>>'
         CREDENTIALS_ID = 'gcr-registry'
     }
+    environment {
+         DOCKER_BUILDKIT='0'
+         }
     stages {
         stage("Checkout code") {
             steps {
@@ -21,9 +24,6 @@ pipeline {
                 }
             }
         }
-        environment {
-         DOCKER_BUILDKIT='0'
-         }
         stage("Push image") {
             steps {
                 script {
