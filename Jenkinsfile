@@ -6,9 +6,6 @@ pipeline {
         //LOCATION = '<<Your GKE Cluster Location>>'
         CREDENTIALS_ID = 'gcr-registry'
     }
-    environment {
-         DOCKER_BUILDKIT='0'
-         }
     stages {
         stage("Checkout code") {
             steps {
@@ -19,7 +16,7 @@ pipeline {
             steps {
                 script {
                     //myapp = docker.build("asia-southeast2-docker.pkg.dev/lif-stg/testing/busybox:${env.BUILD_ID}")
-                     myapp = docker.build("asia-southeast2-docker.pkg.dev/lif-stg/testing/biji")
+                     myapp = docker.build("asia-southeast2-docker.pkg.dev/lif-stg/testing/bulux:${env.BUILD_ID}")
 
                 }
             }
