@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     //myapp = docker.build("asia-southeast2-docker.pkg.dev/lif-stg/testing/busybox:${env.BUILD_ID}")
-                     myapp = docker.build("asia-southeast2-docker.pkg.dev/lif-stg/testing/biji:3")
+                     myapp = docker.build("asia-southeast2-docker.pkg.dev/lif-stg/testing/biji")
 
                 }
             }
@@ -26,7 +26,7 @@ pipeline {
                 script {
                     //docker.withRegistry('https://asia-southeast2-docker.pkg.dev', 'gcr-registry') {
                     //docker.withRegistry("https://asia-southeast2-docker.pkg.dev/lif-stg/testing/busybox:${env.BUILD_ID}") {  
-                    docker.withRegistry('https://asia-southeast2-docker.pkg.dev/lif-stg/testing/biji:3') {  
+                    docker.withRegistry('https://asia-southeast2-docker.pkg.dev/lif-stg/testing/biji') {  
                             myapp.push("latest")
                             myapp.push("${env.BUILD_ID}")
                     }
