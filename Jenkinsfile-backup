@@ -4,7 +4,7 @@ pipeline {
         PROJECT_ID = 'lif-stg'
         //CLUSTER_NAME = '<<Your GKE Cluster Name>>'
         //LOCATION = '<<Your GKE Cluster Location>>'
-        CREDENTIALS_ID = 'aws'
+        CREDENTIALS_ID = 'gcr-registry'
     }
     stages {
         stage("Checkout code") {
@@ -16,8 +16,7 @@ pipeline {
             steps {
                 script {
                     //myapp = docker.build("asia-southeast2-docker.pkg.dev/lif-stg/testing/busybox:${env.BUILD_ID}")
-                     app = docker.build("858240535111.dkr.ecr.ap-southeast-1.amazonaws.com/testing_lookman/buluxa:${env.BUILD_ID}")
-                     //app = docker.build("underwater")
+                     myapp = docker.build("asia-southeast2-docker.pkg.dev/lif-stg/testing/buluxa:${env.BUILD_ID}")
 
                 }
             }
@@ -25,9 +24,11 @@ pipeline {
         stage("Push image") {
             steps {
                 script {
-                    docker.withRegistry('https://858240535111.dkr.ecr.ap-southeast-1.amazonaws.com/testing_lookman', 'ecr:CREDENTIALS_ID') {
-                    app.push("${env.BUILD_NUMBER}")
-                    app.push("latest")
+                    //docker.withRegistry('https://asia-southeast2-docker.pkg.dev', 'gcr-registry') {
+                    docker.withRegistry('https://asia-southeast2-docker.pkg.dev/lif-stg/testing/') {  
+                    //docker.withRegistry('https://asia-southeast2-docker.pkg.dev/lif-stg/','CREDENTIALS_ID') {  
+                            myapp.push("latest")
+                            myapp.push("${env.BUILD_ID}")
                     }
                 }
             }
