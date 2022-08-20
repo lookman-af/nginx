@@ -17,7 +17,7 @@ pipeline {
                 script {
                     //myapp = docker.build("asia-southeast2-docker.pkg.dev/lif-stg/testing/busybox:${env.BUILD_ID}")
                      //app = docker.build("858240535111.dkr.ecr.ap-southeast-1.amazonaws.com/testing_lookman/buluxa:${env.BUILD_ID}")
-                     app = docker.build("underwater")
+                     app = docker.build("test:${env.BUILD_ID}")
 
                 }
             }
@@ -25,7 +25,7 @@ pipeline {
         stage("Push image") {
             steps {
                 script {
-                    docker.withRegistry('https://858240535111.dkr.ecr.ap-southeast-1.amazonaws.com/testing_lookman', 'ecr:CREDENTIALS_ID') {
+                    docker.withRegistry('https://858240535111.dkr.ecr.ap-southeast-1.amazonaws.com/testing_lookman', 'ecr:aws') {
                     app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
                     }
