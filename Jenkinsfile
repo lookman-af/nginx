@@ -16,8 +16,8 @@ pipeline {
             steps {
                 script {
                     //myapp = docker.build("asia-southeast2-docker.pkg.dev/lif-stg/testing/busybox:${env.BUILD_ID}")
-                     app = docker.build("858240535111.dkr.ecr.ap-southeast-1.amazonaws.com/testing_lookman/buluxa:${env.BUILD_ID}")
-                     //app = docker.build("underwater")
+                     //app = docker.build("858240535111.dkr.ecr.ap-southeast-1.amazonaws.com/testing_lookman/buluxa:${env.BUILD_ID}")
+                     app = docker.build("underwater")
 
                 }
             }
